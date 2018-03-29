@@ -18978,6 +18978,8 @@ var _NewStudentForm2 = _interopRequireDefault(_NewStudentForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -19000,6 +19002,7 @@ var Main = function (_Component) {
 
         _this.selectStudent = _this.selectStudent.bind(_this);
         _this.handleClick = _this.handleClick.bind(_this);
+        _this.addStudent = _this.addStudent.bind(_this);
         return _this;
     }
 
@@ -19026,6 +19029,20 @@ var Main = function (_Component) {
             });
         }
     }, {
+        key: 'addStudent',
+        value: function addStudent(student) {
+            var _this3 = this;
+
+            _axios2.default.post("/student", student).then(function (res) {
+                return res.data;
+            }).then(function (newStudent) {
+                _this3.setState({
+                    students: [].concat(_toConsumableArray(_this3.state.students), [newStudent]),
+                    showStudent: false
+                });
+            });
+        }
+    }, {
         key: 'handleClick',
         value: function handleClick(e) {
             return this.setState({
@@ -19048,7 +19065,7 @@ var Main = function (_Component) {
                     { onClick: this.handleClick },
                     'Add Student'
                 ),
-                this.state.showStudent ? _react2.default.createElement(_NewStudentForm2.default, null) : null,
+                this.state.showStudent ? _react2.default.createElement(_NewStudentForm2.default, { addStudent: this.addStudent }) : null,
                 _react2.default.createElement(
                     'table',
                     null,
@@ -20172,8 +20189,7 @@ var NewStudentForm = function (_Component) {
         lastName: this.state.lastName,
         email: this.state.email
       };
-
-      console.log("GONNA ADD THIS STUDENT: ", student);
+      this.props.addStudent(this.state);
       this.setState({ firstName: '', lastName: '', email: '' });
     }
   }, {
