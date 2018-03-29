@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Test = require('../db/models/tests');
 const Student = require('../db/models/students');
 
-router.get('/passing', fuxwwnction(req, res, next) {
+router.get('/passing', function(req, res, next) {
   Test.passing()
     .then(tests => res.json(tests))
     .catch(next);
