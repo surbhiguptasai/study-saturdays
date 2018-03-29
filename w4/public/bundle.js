@@ -20130,6 +20130,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -20144,33 +20146,59 @@ var NewStudentForm = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (NewStudentForm.__proto__ || Object.getPrototypeOf(NewStudentForm)).call(this, props));
 
-    _this.state = {};
+    _this.state = {
+      firstName: "",
+      lastName: "",
+      email: ""
+    };
+
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
 
   _createClass(NewStudentForm, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      console.log("What we're typing: ", event.target.value);
+      this.setState(_defineProperty({}, event.target.name, event.target.value));
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      event.preventDefault();
+      var student = {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email
+      };
+
+      console.log("GONNA ADD THIS STUDENT: ", student);
+      this.setState({ firstName: '', lastName: '', email: '' });
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
         "form",
-        null,
+        { onSubmit: this.handleSubmit },
         _react2.default.createElement(
           "label",
           null,
           "First Name:",
-          _react2.default.createElement("input", { type: "text", name: "firstName" })
+          _react2.default.createElement("input", { type: "text", value: this.state.firstName, name: "firstName", onChange: this.handleChange })
         ),
         _react2.default.createElement(
           "label",
           null,
           "Last Name:",
-          _react2.default.createElement("input", { type: "text", name: "lastName" })
+          _react2.default.createElement("input", { type: "text", value: this.state.lastName, name: "lastName", onChange: this.handleChange })
         ),
         _react2.default.createElement(
           "label",
           null,
           "Email:",
-          _react2.default.createElement("input", { type: "email", name: "email" })
+          _react2.default.createElement("input", { type: "email", value: this.state.email, name: "email", onChange: this.handleChange })
         ),
         _react2.default.createElement(
           "button",
