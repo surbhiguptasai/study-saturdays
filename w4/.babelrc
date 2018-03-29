@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "last 2 versions"
+          ] 
+        }
+      }
+    ],
+    // This tells babel we want to use react w/ es6
+    "react",   
+    "stage-2" 
+  ]
+}
