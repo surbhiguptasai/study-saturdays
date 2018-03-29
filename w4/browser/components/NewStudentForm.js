@@ -27,8 +27,7 @@ export default class NewStudentForm extends Component {
       lastName: this.state.lastName,
       email: this.state.email,
     };
-
-    console.log("GONNA ADD THIS STUDENT: ", student)
+    this.props.addStudent(this.state)
     this.setState({ firstName: '', lastName: '', email: '' });
   }
 
