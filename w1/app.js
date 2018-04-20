@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
 // Routes
-const Student = require('./routes/routes');
+const studentRouter = require('./routes/student');
+const testRouter = require('./routes/test');
 
 // Init App
 const app = express();
@@ -15,7 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 // Mount Router
-app.use('/student', Student);
+app.use('/student', studentRouter);
+app.use('/test', testRouter);
 
 // Err-handling
 app.use(function(err, req, res, next) {

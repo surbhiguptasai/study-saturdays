@@ -1,16 +1,6 @@
 // Express routes
 const router = require('express').Router()
 
-// Create Student Models
-let students = [
-	{ id : 0, name : 'Dan'},
-	{ id : 1, name : 'Rohan'},
-	{ id : 2, name : 'Sol'},
-	{ id : 3, name : 'Ella'},
-	{ id : 4, name : 'Michael'},
-	{ id : 5, name : 'Karen'},
-];
-
 let tests = [
 	{id : 0, subject : 'Physics', score : 99, studentId : 0},
 	{id : 1, subject : 'English', score : 78, studentId : 1},
@@ -19,42 +9,6 @@ let tests = [
 	{id : 4, subject : 'Physics', score : 88, studentId : 4},
 ]
 
-// Get Students
-router.get('/', function(req, res ,next) {
-  res.json({students})
-})
-
-// Get Student by Id
-router.get('/:id', function(req, res ,next) {
-  let student = students.filter(person => person.id === req.params.id);
-  res.json({student})
-})
-
-// Add Student
-router.post('/', function(req, res ,next) {
-  let newId = students.length + 1;
-  let student = {
-  	id : newId,
-  	name : req.body.name
-  }
-  students.push(student)
-  res.json({students})
-})
-
-// Delete Student
-router.delete('/:id', function(req, res ,next) {
-  let newClass = students.filter(person => person.id != req.params.id)
-  students = newClass;
-  res.json({students})
-})
-
-// Update Student
-router.put('/:id', function(req, res ,next) {
-  let updatedStudent = students.filter(person => person.id === req.params.id)[0];
-  updatedStudent.name = req.body.name;
-  students[req.params.id] = updatedStudent;
-  res.json({students})
-})
 
 
 // Get Tests
@@ -96,9 +50,6 @@ router.put('/tests/:id', function(req, res ,next) {
   updatedScore.subject = req.body.subject;
   tests[req.params.id] = updatedScore;
   res.json({tests})
-})
-
-
-
+});
 
 module.exports = router
