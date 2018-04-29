@@ -21,7 +21,7 @@
 ### Week IV) Adding form validations
 
 
-## Structure
+## Structure Hello!!!!!!!!!!
 
 - 4 workshops to be completed over 4 Saturdays
 
